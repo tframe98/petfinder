@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Pet Finder </title>
+</head>
+<body>
+  <h1>Animal Shelter Dashboard</h1>
+  <div id="pets"></div>
+
+  <script>
+    async function fetchPets() {
+      const response = await fetch ('/api/v1/pets');
+      const pets = await response.json();
+      const petsList = pets.map(pet => `<li>${pet.name} owned by ${pet.owner} (${pet.type})</li>`).join('');
+      document.getElementById('pets').innerHTML = `<ul>${petsList}</ul>`;
+    }
+    fetchPets();
+  </script>
+</body>
+</html>
